@@ -1,18 +1,24 @@
 "use client";
-import { SignOutButton, UserButton, useUser } from "@clerk/nextjs";
+import { SignIn, SignOutButton, UserButton, useUser } from "@clerk/nextjs";
 
-export default function Example() {
+export default function Home() {
   const { isLoaded, isSignedIn, user } = useUser();
 
   if (!isLoaded || !isSignedIn) {
-    return null;
+    <div className="flex items-center justify-between w-full h-20 mx-auto max-w-7xl">
+      <div>welcome to Clerk</div>
+      <div>
+        <SignIn />
+      </div>
+    </div>;
   }
 
   return (
-    <div className="w-full flex justify-between max-w-7xl mx-auto h-20 items-center">
-      <div>Hello, {user.firstName} welcome to Clerk</div>
+    <div className="flex items-center justify-between w-full h-20 mx-auto max-w-7xl">
+      <div>Hello, {user?.firstName} welcome to Clerk</div>
       <div>
         <UserButton />
+        <a href="/sign-in">Sign In</a>
       </div>
     </div>
   );
